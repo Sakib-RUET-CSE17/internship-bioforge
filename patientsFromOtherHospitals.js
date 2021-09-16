@@ -1,39 +1,37 @@
 //to use the current patients array
 const patients = require("./patient");
 
-const outsidePatients = [
+const patientsFromOtherHospital = [
     {
-        firstName: 'Abul',
-        lastName: 'Hosain',
-        requiredKidney: true,
-        kidneyDonor: false,
-        covidPositive: true,
-        numberOfDiseases: 3,
+        firstName: "Agent",
+        lastName: "Pena",
+        diseases: ["COVID"],
     },
     {
-        firstName: 'Kabul',
-        lastName: 'Hosain',
-        requiredKidney: false,
-        kidneyDonor: true,
-        covidPositive: false,
-        numberOfDiseases: 1,
+        firstName: "Heisenberg",
+        lastName: "Bear",
+        diseases: ["Headache"]
     },
     {
-        firstName: 'Babul',
-        lastName: 'Hosain',
-        requiredKidney: true,
-        kidneyDonor: false,
-        covidPositive: true,
-        numberOfDiseases: 2,
+        firstName: "Okarin",
+        lastName: "May",
+        diseases: ["Broken Wrist", "Mad-scientist"],
+    },
+    {
+        firstName: "Hououin",
+        lastName: "Kyoma",
+        diseases: ["Delusional disorder", "Memory loss"],
     },
 ];
 
 const addOutsidePatients = () => {
-    let startID = patients[patients.length - 1].ID;
-    outsidePatients.map(patient => {
-        patient.ID = ++startID;
+    let maxID = patients.reduce((previous, current) => previous.patientID > current.patientID ? previous : current).patientID;
+    // console.log(String(++maxID).padStart(3, '0'))
+    patientsFromOtherHospital.map(patient => {
+        patient.patientID = String(++maxID).padStart(3, '0');
+        // patient.isAdmitted = true;
     })
-    allPatients = [...patients, ...outsidePatients];
+    allPatients = [...patients, ...patientsFromOtherHospital];
     return allPatients;
 }
 
